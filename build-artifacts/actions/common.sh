@@ -1,4 +1,7 @@
 function normalizeBranchName {
-    # take the base name and change dots to underscores
-    echo $(basename "$1" | sed 's/\./_/g' | tr '[:upper:]' '[:lower:]')
+    # normalizations
+    # 1. change dots to underscores
+    # 2. to lower case
+    # 3. cut to maximum 80 characters
+    echo $(basename "$1" | sed 's/\./_/g' | tr '[:upper:]' '[:lower:]' | cut -c -80)
 }
