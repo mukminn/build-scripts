@@ -28,5 +28,3 @@ done
 rm -f $tmpfile
 
 echo "Done."
-
-#rm -rf $BUILDS_DIR/archives

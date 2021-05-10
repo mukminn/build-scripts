@@ -51,3 +51,12 @@ runs:
         INPUT_SCRIPT_SHELL: bash
         INPUT_SCRIPT_PATH: ${{ github.action_path }}/cleanup-builds.sh
         INPUT_SCRIPT_ARGS: ${{ inputs.base_build_dir }}
+
+    - name: Delete archives
+      shell: bash
+      run: ./dev-host/actions/exec/action.sh
+      env:
+        INPUT_DEV_HOST_HOSTNAME: ${{ inputs.hostname }}
+        INPUT_DEV_HOST_USER: ${{ inputs.user }}
+        INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
+        INPUT_COMMAND: echo rm -rf "${{ inputs.base_build_dir }}/archives"

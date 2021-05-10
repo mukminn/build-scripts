@@ -23,7 +23,7 @@ mkdir -p $BUILDS_DIR/archives
 ls $BUILDS_DIR/branches | while read i;do
     if ! grep --quiet --line-regexp $i $tmpfile;then
         echo "Deleting branch $i..."
-        echo mv $BUILDS_DIR/branches/$i $BUILDS_DIR/archives/
+        mv $BUILDS_DIR/branches/$i $BUILDS_DIR/archives/
     fi
 done
 
