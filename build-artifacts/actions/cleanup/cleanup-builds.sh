@@ -22,7 +22,7 @@ done
 mkdir -p $BUILDS_DIR/archives
 cat $tmpfile | while read rev;do
     echo "Deleting rev $rev"
-    mv $BUILDS_DIR/revs/$rev $BUILDS_DIR/archives/$rev
+    mv $BUILDS_DIR/revs/$rev $BUILDS_DIR/archives/
 done
 
 rm -f $tmpfile

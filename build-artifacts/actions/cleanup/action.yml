@@ -20,6 +20,17 @@ runs:
       shell: bash
       run: git clone https://github.com/decentral-ee/dev-host.git
 
+    - name: Run cleanup-branches.sh
+      shell: bash
+      run: ./dev-host/actions/run-script/action.sh
+      env:
+        INPUT_DEV_HOST_HOSTNAME: ${{ inputs.hostname }}
+        INPUT_DEV_HOST_USER: ${{ inputs.user }}
+        INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
+        INPUT_SCRIPT_SHELL: bash
+        INPUT_SCRIPT_PATH: ${{ github.action_path }}/cleanup-branches.sh
+        INPUT_SCRIPT_ARGS: ${{ inputs.base_build_dir }} https://github.com/${{ github.repository }}.git
+
     - name: Run cleanup-builds.sh
       shell: bash
       run: ./dev-host/actions/run-script/action.sh
