@@ -29,7 +29,9 @@ runs:
     - id: process
       name: Process inputs
       shell: bash
-      run: ${{ github.action_path }}/process-inputs.sh >> $GITHUB_ENV
+      run: |
+        ${{ github.action_path }}/process-inputs.sh >> $GITHUB_ENV
+        echo "::set-output name=normalized_branch_name::${{ env.NORMALIZED_BRANCH_NAME }}"
       env:
         INPUT_BRANCH_NAME: ${{ inputs.branch_name }}
         INPUT_BASE_BUILD_DIR: ${{ inputs.base_build_dir }}
