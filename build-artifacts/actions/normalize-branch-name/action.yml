@@ -11,7 +11,8 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - shell: bash
+    - id: process
+      shell: bash
       run: |
         source "${{ github.action_path }}"/../common.sh
-        echo "::set-output name=normalized_branch_name::$(normalizeBranchName ${{ inputs.branch_name}}))"
+        echo "::set-output name=normalized_branch_name::$(normalizeBranchName ${{ inputs.branch_name }})"
