@@ -19,10 +19,15 @@ inputs:
   base_build_dir:
     description: 'Base build directory on the DevHost server.'
     required: true
+outputs:
+  normalized_branch_name:
+    description: 'Normalized branch name used in the action.'
+    value: ${{ steps.process.outputs.normalized_branch_name }}
 runs:
   using: 'composite'
   steps:
-    - name: Process inputs
+    - id: process
+      name: Process inputs
       shell: bash
       run: ${{ github.action_path }}/process-inputs.sh >> $GITHUB_ENV
       env:
