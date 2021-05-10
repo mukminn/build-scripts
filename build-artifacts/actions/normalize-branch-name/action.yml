@@ -1,0 +1,17 @@
+name: 'Normalize branch name'
+description: 'Normalize the branch name for the build artifact.'
+inputs:
+  branch_name:
+    description: 'Branch name of the build.'
+    required: true
+outputs:
+  normalized_branch_name:
+    description: 'Normalized branch name used in the action.'
+    value: ${{ steps.process.outputs.normalized_branch_name }}
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: |
+        source "${{ github.action_path }}"/../common.sh
+        echo "::set-output name=normalized_branch_name::$(normalizeBranchName ${{ inputs.branch_name}}))"
