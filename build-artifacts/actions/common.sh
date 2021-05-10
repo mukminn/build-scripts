@@ -1,3 +1,8 @@
+function oops() {
+    echo "$@" >&2
+    exit 1
+}
+
 function normalizeBranchName {
     # normalizations
     # 1. change dots to underscores

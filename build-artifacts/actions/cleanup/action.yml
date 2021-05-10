@@ -1,0 +1,32 @@
+name: 'Cleanup build artifacts'
+description: 'Cleanup stale build artifacts on the DevHost.'
+inputs:
+  hostname:
+    description: 'Hostname of the DevHost server.'
+    required: true
+  user:
+    description: 'User of the DevHost server.'
+    required: true
+  ssh_key:
+    description: 'SSH key for the user of the DevHost server.'
+    required: true
+  base_build_dir:
+    description: 'Base build directory on the DevHost server.'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Clone DevHost toolkit
+      shell: bash
+      run: git clone https://github.com/decentral-ee/dev-host.git
+
+    - name: Run cleanup-builds.sh
+      shell: bash
+      run: ./dev-host/actions/run-script/action.sh
+      env:
+        INPUT_DEV_HOST_HOSTNAME: ${{ inputs.hostname }}
+        INPUT_DEV_HOST_USER: ${{ inputs.user }}
+        INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
+        INPUT_SCRIPT_SHELL: bash
+        INPUT_SCRIPT_PATH: "${{ github.action_path }}"/cleanup-builds.sh
+        INPUT_SCRIPT_ARGS: "${{ inputs.base_build_dir }}"
