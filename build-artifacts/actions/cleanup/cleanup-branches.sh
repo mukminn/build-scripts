@@ -1,16 +1,7 @@
-#!/bin/bash
-
-source "$(dirname "$0")"/../../common.sh
-
 BUILDS_DIR=$1
 [ -d "$BUILDS_DIR"/branches ] && [ -d "$BUILDS_DIR"/revs ] || oops "Invalild builds directory: $BUILDS_DIR"
 REPO=$2
 [ ! -z "$REPO" ] || oops "Repository is missing"
-
-function normalizeBranchName {
-    # take the base name and change dots to underscores
-    echo $(basename "$1" | sed 's/\./_/g' | tr '[:upper:]' '[:lower:]')
-}
 
 echo "Cleaning builds branches: $BUILDS_DIR..."
 
