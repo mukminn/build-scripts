@@ -28,5 +28,5 @@ runs:
         INPUT_DEV_HOST_USER: ${{ inputs.user }}
         INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
         INPUT_SCRIPT_SHELL: bash
-        INPUT_SCRIPT_PATH: "${{ github.action_path }}"/cleanup-builds.sh
-        INPUT_SCRIPT_ARGS: "${{ inputs.base_build_dir }}"
+        INPUT_SCRIPT_PATH: ${{ github.action_path }}/cleanup-builds.sh
+        INPUT_SCRIPT_ARGS: ${{ inputs.base_build_dir }}

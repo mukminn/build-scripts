@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")"/../common.sh
+source "$(dirname "$0")"/../../common.sh
 
 NORMALIZED_BRANCH_NAME=$(normalizeBranchName "$INPUT_BRANCH_NAME")
 HEAD_SHORT_REV=$(git rev-parse --short HEAD)

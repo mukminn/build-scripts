@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")"/../common.sh
+source "$(dirname "$0")"/../../common.sh
 
 BUILDS_DIR=$1
 [ -d "$BUILDS_DIR"/branches ] && [ -d "$BUILDS_DIR"/revs ] || oops "Invalild builds directory: $BUILDS_DIR"
