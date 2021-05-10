@@ -10,9 +10,6 @@ inputs:
   ssh_key:
     description: 'SSH key for the user of the DevHost server.'
     required: true
-  github_token:
-    description: 'Github token used to list branches of the repo.'
-    required: true
   base_build_dir:
     description: 'Base build directory on the DevHost server.'
     required: true
@@ -39,7 +36,7 @@ runs:
         INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
         INPUT_SCRIPT_SHELL: bash
         INPUT_SCRIPT_PATH: composed-cleanup-branches.sh
-        INPUT_SCRIPT_ARGS: ${{ inputs.base_build_dir }} https://${{ inputs.github_token }}@github.com/${{ github.repository }}.git
+        INPUT_SCRIPT_ARGS: ${{ inputs.base_build_dir }} https://${{ github.token }}:x-oauth-basic@github.com/${{ github.repository }}.git
 
     - name: Run cleanup-builds.sh
       shell: bash
