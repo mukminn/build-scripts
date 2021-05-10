@@ -14,5 +14,5 @@ runs:
     - id: process
       shell: bash
       run: |
-        source "${{ github.action_path }}"/../common.sh
+        source "${{ github.action_path }}"/../../common.sh
         echo "::set-output name=normalized_branch_name::$(normalizeBranchName ${{ inputs.branch_name }})"
