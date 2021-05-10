@@ -1,0 +1,53 @@
+name: 'Upload build artifacts'
+description: 'Upload branch-name tagged build artifacts to the DevHost.'
+inputs:
+  hostname:
+    description: 'Hostname of the DevHost server.'
+    required: true
+  user:
+    description: 'User of the DevHost server.'
+    required: true
+  ssh_key:
+    description: 'SSH key for the user of the DevHost server.'
+    required: true
+  branch_name:
+    description: 'Branch name of the build.'
+    required: true
+  local_build_dir:
+    description: 'Local build directory.'
+    required: true
+  base_build_dir:
+    description: 'Base build directory on the DevHost server.'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Process inputs
+      shell: bash
+      run: ${{ github.action_path }}/process-inputs.sh >> $GITHUB_ENV
+      env:
+        INPUT_BRANCH_NAME: ${{ inputs.branch_name }}
+        INPUT_BASE_BUILD_DIR: ${{ inputs.base_build_dir }}
+
+    - name: Clone DevHost toolkit
+      shell: bash
+      run: git clone https://github.com/decentral-ee/dev-host.git
+
+    - name: Upload build artifact to DevHost server
+      shell: bash
+      run: ./dev-host/actions/rsync/action.sh
+      env:
+        INPUT_DEV_HOST_HOSTNAME: ${{ inputs.hostname }}
+        INPUT_DEV_HOST_USER: ${{ inputs.user }}
+        INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
+        INPUT_LOCAL_PATH: ${{ inputs.local_build_dir }}
+        INPUT_REMOTE_PATH: ${{ env.REMOTE_BUILD_DIR }}
+
+    - name: Create symlink for latest branch build artifact
+      shell: bash
+      run: ./dev-host/actions/exec/action.sh
+      env:
+        INPUT_DEV_HOST_HOSTNAME: ${{ inputs.hostname }}
+        INPUT_DEV_HOST_USER: ${{ inputs.user }}
+        INPUT_DEV_HOST_SSH_KEY: ${{ inputs.ssh_key }}
+        INPUT_COMMAND: ln -nsf ${{ env.LATEST_BUILD_SYMLINK_PATH }} ${{ env.REMOTE_LATEST_BUILD_SYMLINK }}
