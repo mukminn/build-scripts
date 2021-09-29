@@ -1,0 +1,25 @@
+name: 'Sync'
+description: ' Sync the local build folder with the S3CloudFront instance'
+inputs:
+  local_build_dir:
+    description: 'Local build directory.'
+    required: true
+  s3_uri:
+    description: 'S3 URI to sync build directory with.'
+    required: true
+  cloudfront_distribution_id:
+    description: 'CloudFront distribution ID.'
+    required: true
+
+runs:
+using: 'composite'
+steps:
+  - id: process
+    name: Process inputs
+    shell: bash
+    run: |
+      "${{ github.action_path }}"/sync.sh
+    env:
+      DIST_DIR: ${{ inputs.dist_dir }}
+      S3_URI: ${{ inputs.s3_uri }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ inputs.cloudfront_distribution_id }}
