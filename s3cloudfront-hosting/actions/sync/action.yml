@@ -29,6 +29,6 @@ runs:
         AWS_DEFAULT_REGION: ${{ inputs.aws_region }}
         AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
-        DIST_DIR: ${{ inputs.dist_dir }}
+        LOCAL_BUILD_DIR: ${{ inputs.local_build_dir }}
         S3_URI: ${{ inputs.s3_uri }}
         CLOUDFRONT_DISTRIBUTION_ID: ${{ inputs.cloudfront_distribution_id }}

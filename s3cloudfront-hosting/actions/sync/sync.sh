@@ -2,7 +2,7 @@
 
 aws s3 sync \
     --delete \
-    ${DIST_DIR}/ \
+    ${LOCAL_BUILD_DIR}/ \
     ${S3_URI}
 
 aws cloudfront create-invalidation \
