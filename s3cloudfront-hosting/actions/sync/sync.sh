@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-echo aws s3 sync \
+aws s3 sync \
     --delete \
     ${DIST_DIR}/ \
     ${S3_URI}
